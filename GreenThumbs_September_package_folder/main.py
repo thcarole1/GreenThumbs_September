@@ -172,8 +172,8 @@ def say_hello():
 
 if __name__ == '__main__':
     try:
-        main_program()
-        # train_model()
+        # main_program()
+        train_model()
         # save_original_data()
         # test_prediction()
 
