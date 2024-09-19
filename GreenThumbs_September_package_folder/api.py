@@ -82,8 +82,22 @@ def create_upload_files(upload_file: UploadFile = File(...)):
     prediction = prediction.tolist()
 
     #Type of prediction_final : <class 'list'>
-    prediction_final = [np.round(pred[0],1)*10 for pred in prediction]
+    prediction_final = [pred[0] for pred in prediction]
     print(f"✅ Type of prediction_final : {type(prediction_final)}")
     print(prediction_final)
+
+    # Convert to either 1 (positive) or 0 (negative) review
+    # Type of final_result : <class 'list'>
+    final_result = []
+    for element in prediction_final:
+        if element >= 0.5:
+            final_result.append(1.)
+        else:
+            final_result.append(0.)
+
+    print(f"✅ Type of final_result : {type(final_result)}")
+    print(final_result)
+    print(X_test.iloc[:, :])
+
     # Return the prediction to the user
-    return {'Prediction' : prediction_final}
+    return {'Prediction' : final_result}

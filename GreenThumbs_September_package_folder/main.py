@@ -164,8 +164,17 @@ def test_prediction():
     prediction = get_prediction(X_test_pad, model)
     prediction = prediction.tolist()
     prediction_final = [_[0] for _ in prediction]
-    prediction_final = np.round(prediction_final, 1) *10
-    print(prediction_final)
+
+    # Convert to either 1 (positive) or 0 (negative) review
+    final_result = []
+    for element in prediction_final:
+        if element >= 0.5:
+            final_result.append(1.)
+        else:
+            final_result.append(0.)
+
+    # print(prediction_final)
+    print(final_result)
     print(f"✅ Prediction Done ! ")
     print(X_test.iloc[:, :])
 
